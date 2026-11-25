@@ -20,8 +20,14 @@ const LINE =
   "I trade crypto because the stock market closes and my bad decisions need 24/7 access.";
 
 // Gate mirror: the house gate accepts 1-200 characters of non-whitespace
-// text. Fail loudly here rather than write a line the gate would refuse.
-if (LINE.length < 1 || LINE.length > 200 || !LINE.trim()) {
+// text, and the task demands one line. Fail loudly here rather than write
+// a line the gate would refuse or a line that is not one line.
+if (
+  LINE.length < 1 ||
+  LINE.length > 200 ||
+  !LINE.trim() ||
+  LINE.includes("\n")
+) {
   throw new Error(`entry line is ${LINE.length} chars, outside the 1-200 gate`);
 }
 
